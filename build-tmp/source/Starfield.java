@@ -25,14 +25,18 @@ public void setup()
 	{
 		particlez[i] = new NormalParticle();
 	}
+	((NormalParticle)particlez[0]).dSpeed = 10;
 	particlez[particlez.length - 1] = new OddballParticle();
 }
 public void draw()
 {
-	if((int)((NormalParticle)particlez[0]).dX == 350 && (int)((NormalParticle)particlez[0]).dY ==  350)
+	//if((int)((NormalParticle)particlez[0]).dX == 350 )
+		// && (int)((NormalParticle)particlez[0]).dY ==  350)
+    if(((NormalParticle)particlez[0]).dX - 350 < 2 && (((NormalParticle)particlez[0]).dY - 350) < 2 )
 	{
 			background(0);
 	}
+
 	for(int i = 0; i <particlez.length; i++)
 	{
 		particlez[i].move();
