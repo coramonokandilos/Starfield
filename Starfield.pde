@@ -11,11 +11,10 @@ void setup()
 	}
 	((NormalParticle)particlez[0]).dSpeed = 10;
 	particlez[particlez.length - 1] = new OddballParticle();
+	particlez[particlez.length - 2] = new Jumbo();
 }
 void draw()
 {
-	//if((int)((NormalParticle)particlez[0]).dX == 350 )
-		// && (int)((NormalParticle)particlez[0]).dY ==  350)
     if(((NormalParticle)particlez[0]).dX - 350 < 2 && (((NormalParticle)particlez[0]).dY - 350) < 2 )
 	{
 			background(0);
@@ -26,6 +25,12 @@ void draw()
 		particlez[i].move();
 		particlez[i].show();
 	}
+
+}
+interface Particle
+{
+	public void move();
+	public void show();
 }
 class NormalParticle implements Particle
 {
@@ -41,7 +46,7 @@ class NormalParticle implements Particle
 		{
 			dX = dX + Math.cos(dTheta)*dSpeed;
 			dY = dY + Math.sin(dTheta)*dSpeed;
-			dTheta += 0.01 ;
+			dTheta += 0.015;
 		}
 	public void show()
 		{
@@ -51,11 +56,7 @@ class NormalParticle implements Particle
 		}
 
 }
-interface Particle
-{
-	public void move();
-	public void show();
-}
+
 class OddballParticle implements Particle
 {
 	double dXX, dYY, dTheta2, dSpeed2;
@@ -79,4 +80,25 @@ class OddballParticle implements Particle
 	}
 }
 
+class Jumbo extends NormalParticle implements Particle
+{
+	int jumboSize;
+	Jumbo()
+	{
+		jumboSize = 100;	
+	}
+	public void move()
+	{
+		dX = dX + Math.cos(dTheta)*dSpeed;
+		dY = dY + Math.sin(dTheta)*dSpeed;
+		dTheta += 0.015;
+	}
+	public void show()
+		{
+
+			fill(200, 200, 200);
+			ellipse((float)dX, (float)dY, jumboSize, jumboSize);
+		}
+
+}
 
